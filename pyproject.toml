@@ -1,0 +1,128 @@
+# see https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "taxotagger"
+version = "0.0.1-alpha.1"
+description = "Fungi DNA barcoder based on semantic searching"
+readme = "README.md"
+requires-python = ">=3.10"
+keywords = ["Fungi", "Taxonomy", "Semantic search", "Vector database", "Machine learning"]
+license = { text = "Apache-2.0 license" }
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Education",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Natural Language :: English",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+]
+dependencies = [
+    "httpx",
+    "mycoai-its",
+    "pydantic",
+    "pymilvus",
+    "rich",
+    "torch",
+]
+
+[project.optional-dependencies]
+dev = [
+    # packaging
+    "build",
+    "wheel",
+    # formatting and linting
+    "ruff",
+    # testing
+    "pytest",
+    "pytest-cov",
+    "coverage[toml]",
+    # static typing
+    "mypy",
+    "typing_extensions",
+    # stub packages
+    "types-Deprecated",
+    # docs
+    "black",
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocs-exclude",
+    "mkdocs-redirects",
+    "mkdocstrings-python",
+    "mike",
+]
+
+[project.urls]
+"Repository" = "https://github.com/MycoAI/taxotagger"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+namespaces = true # enable data directory to be identified
+
+
+# Mypy: to check static type
+# see https://mypy.readthedocs.io/en/stable/config_file.html#example-pyproject-toml
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "D", # pydocstyle
+    "E", # pycodestyle (error)
+    "W", # pycodestyle (warning)
+    "F", # Pyflakes
+    "I", # isort
+    "N", # pep8-naming
+]
+ignore = [
+    "E501", # Line too long
+    "D100", # Missing module docstring
+    "D104", # Missing public package docstring
+    "D105", # Missing docstring in magic method
+    "D107", # Missing `__init__` docstring
+    # The following list excludes rules irrelevant to the Google style
+    "D203",
+    "D204",
+    "D213",
+    "D215",
+    "D400",
+    "D401",
+    "D404",
+    "D406",
+    "D407",
+    "D408",
+    "D409",
+    "D413",
+]
+
+# Allow autofix for all enabled rules (when `--fix`) is provided.
+fixable = ["A", "B", "C", "D", "E", "F", "I"]
+ignore-init-module-imports = true
+
+[tool.ruff.lint.per-file-ignores]
+# Ignore docstrings in all test files
+"tests/**py" = ["D"]
+
+[tool.ruff.lint.isort]
+force-single-line = true
+lines-after-imports = 2
+no-lines-before = [
+    "future",
+    "standard-library",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
