@@ -87,7 +87,7 @@ class TaxoTagger:
 
                 - `limit`: The maximum number of matched results to return. Defaults to 10.
                 - `filter`: The filtering condition to filter matched results.
-                - `timeout`: The timeout in seconds for the search operation. Defaults to 60.
+                - `timeout`: The timeout in seconds for the search operation. Defaults to None.
 
                 See the `search` method of the Milvus client for more details:
                 https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md.
