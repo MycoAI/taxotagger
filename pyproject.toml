@@ -28,6 +28,7 @@ dependencies = [
     "mycoai-its",
     "pydantic",
     "pymilvus",
+    "pympler",
     "rich",
     "torch",
 ]

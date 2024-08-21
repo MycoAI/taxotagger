@@ -4,7 +4,9 @@ import warnings
 from typing import Any
 from pymilvus import DataType
 from pymilvus import MilvusClient
+from pympler import asizeof
 from .config import ProjectConfig
+from .defaults import MAX_BATCH_SIZE_BYTES
 from .defaults import TAXONOMY_LEVELS
 from .logger import setup_logging
 from .models import ModelFactory
@@ -117,7 +119,7 @@ class TaxoTagger:
         }
 
         # Get the embeddings for the query
-        query_embedding = self.embed(fasta_file, model_id)
+        embeddings = self.embed(fasta_file, model_id)
 
         #  Get output fields
         output_taxonomies = self._validate_taxonomies(output_taxonomies)
@@ -136,19 +138,38 @@ class TaxoTagger:
         client = MilvusClient(db_path)
         results = {}
         for taxo_level in output_taxonomies:
-            logger.debug(f"Searching in the collection [blue1]{taxo_level}[/blue1]")
-            res = client.search(
-                collection_name=taxo_level,
-                data=[d["vector"] for d in query_embedding[taxo_level]],
-                output_fields=output_fields,
-                **kwargs,
+            logger.debug(f"Searching in the collection [blue]{taxo_level}[/blue]")
+
+            # Prepare input data for the search
+            data = [d["vector"] for d in embeddings[taxo_level]]
+
+            size_of_data, num_items, items_per_batch = self._get_batch_params(data)
+            logger.debug(
+                f"Embeddings for {taxo_level}: {size_of_data / (1024*1024):.1f} MB, "
+                f"{num_items} items in total, {items_per_batch} items per batch"
             )
-            results[taxo_level] = res
+
+            results_batch = []
+            for i in range(0, num_items, items_per_batch):
+                res = client.search(
+                    collection_name=taxo_level,
+                    data=data[i : i + items_per_batch],
+                    output_fields=output_fields,
+                    **kwargs,
+                )
+                results_batch += res
+
+            results[taxo_level] = results_batch
         client.close()
 
         return results
 
-    def create_db(self, fasta_file: str, model_id: str = "MycoAI-CNN", db_name: str = "") -> None:
+    def create_db(
+        self,
+        fasta_file: str,
+        model_id: str = "MycoAI-CNN",
+        db_name: str = "",
+    ) -> None:
         """Create a vector database for the DNA sequences in the fasta file with Milvus.
 
         Args:
@@ -174,12 +195,11 @@ class TaxoTagger:
         db_name = db_name if db_name else f"{model_id}.db"
         db_path = os.path.join(self._config.mycoai_home, db_name)
 
-        client = MilvusClient(db_path)
-
-        logger.info(
-            f"Creating a vector database for the DNA sequences in [magenta]{fasta_file}[/magenta] at {db_path}"
-        )
         # Create collections for each taxonomy level
+        logger.info(
+            f"Creating vector database for the DNA sequences in [magenta]{fasta_file}[/magenta] at {db_path}"
+        )
+        client = MilvusClient(db_path)
         for taxo_level in TAXONOMY_LEVELS:
             schema, index_params = schema_index_dict[taxo_level]
 
@@ -192,15 +212,22 @@ class TaxoTagger:
                 index_params=index_params,
             )
 
-        # Insert the data with batch insert
+        # Insert the data into the collections
         for taxo_level in TAXONOMY_LEVELS:
-            batch_size = 1000
-            for i in range(0, len(embeddings[taxo_level]), batch_size):
-                client.insert(
-                    collection_name=taxo_level, data=embeddings[taxo_level][i : i + batch_size]
-                )
+            logger.debug(f"Inserting data into the collection [blue]{taxo_level}[/blue]")
+
+            data = embeddings[taxo_level]
+            size_of_data, num_items, items_per_batch = self._get_batch_params(data)
+            logger.debug(
+                f"Embeddings for {taxo_level}: {size_of_data / (1024*1024):.1f} MB, "
+                f"{num_items} items in total, {items_per_batch} items per batch"
+            )
+
+            for i in range(0, num_items, items_per_batch):
+                client.insert(collection_name=taxo_level, data=data[i : i + items_per_batch])
 
         client.close()
+        logger.info(f"Database created successfully at {db_path}")
 
     def _validate_taxonomies(self, taxonomies: list[str]) -> list[str]:
         """Validate the taxonomy levels and return the valid ones.
@@ -275,3 +302,30 @@ class TaxoTagger:
             res[taxo_level] = (schema, index_params)
 
         return res
+
+    @staticmethod
+    def _get_batch_params(data: list) -> tuple[int, int, int]:
+        """Calculate the size of the data, total number of items, and the number of items per batch.
+
+        Milvus has a limit on the size of the data (i.e. `MAX_BATCH_SIZE_BYTES`) that can be
+        inserted, searched or queried at once. So the data needs to be split into batches when it
+        exceeds the limit.
+
+        For more information, see the Milvus documentation: https://milvus.io/docs/limitations.md.
+
+        Args:
+            data: The list of embeddings.
+
+        Returns:
+            tuple[int, int, int]: The size of the data in bytes, the total number of items, and the
+                number of items per batch.
+        """
+        size_of_data = asizeof.asizeof(data)
+        num_items = len(data)
+
+        if size_of_data <= MAX_BATCH_SIZE_BYTES:
+            return size_of_data, num_items, num_items
+        else:
+            avg_item_size = size_of_data / num_items
+            items_per_batch = max(1, int(MAX_BATCH_SIZE_BYTES / avg_item_size))
+            return size_of_data, num_items, items_per_batch
