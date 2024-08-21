@@ -1,0 +1,136 @@
+site_name: TaxoTagger
+site_description: Fungi DNA barcode identification tool, powered by semantic searching.
+strict: false
+site_url: https://mycoai.github.io/taxotagger/
+
+theme:
+  # https://squidfunk.github.io/mkdocs-material/
+  name: 'material'
+  palette:
+  - media: "(prefers-color-scheme: light)"
+    scheme: default
+    primary: red
+    accent: indigo
+    toggle:
+      icon: material/weather-sunny
+      name: "Switch to dark mode"
+  - media: "(prefers-color-scheme: dark)"
+    scheme: slate
+    primary: red
+    accent: indigo
+    toggle:
+      icon: material/weather-night
+      name: "Switch to light mode"
+  features:
+    - content.tabs.link
+    - content.code.annotate
+    - content.code.copy
+    - announce.dismiss
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - search.suggest
+  icon:
+    logo: 'material/library-outline'
+    previous: fontawesome/solid/angle-left
+    next: fontawesome/solid/angle-right
+  favicon: 'favicon.png'
+
+repo_name: MycoAI/taxotagger
+repo_url: https://github.com/MycoAI/taxotagger
+edit_uri: edit/dev/docs/
+extra:
+  version:
+    provider: mike
+
+extra_css:
+  - css/extra.css
+
+# https://www.mkdocs.org/user-guide/configuration/#validation
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+
+nav:
+- Get Started:
+  - About Taxotagger: index.md
+  - Quick Start: quickstart.md
+  - Installation: install.md
+- User Guide:
+  - Custom Embedding Models: guide/custom_models.md
+  - Logging: guide/logging.md
+- API Reference:
+  - TaxoTagger: api/taxotagger.md
+  - Embedding Models: api/models.md
+  - Configuration: api/config.md
+  - Defaults: api/defaults.md
+  - Logging: api/logger.md
+  - Utilities: api/utils.md
+  - Base classes: api/abc.md
+
+markdown_extensions:
+# https://python-markdown.github.io/extensions/
+- toc:
+    permalink: true
+- admonition
+# https://facelessuser.github.io/pymdown-extensions
+- pymdownx.details
+- pymdownx.highlight:
+    anchor_linenums: true
+    pygments_lang_class: true
+- pymdownx.extra:
+    pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+- pymdownx.tabbed:
+    alternate_style: true
+- pymdownx.magiclink
+- pymdownx.keys
+- pymdownx.snippets: # use files outside of docs folder, syntax is `--8<-- "path/to/file"`
+    base_path: [.]
+
+watch:
+- docs
+
+plugins:
+- mike:
+    alias_type: symlink
+    canonical_version: latest
+- search
+- autorefs # https://mkdocstrings.github.io/usage/#cross-references-to-any-markdown-heading
+- exclude:
+    glob:
+    - __pycache__/*
+- mkdocstrings:
+    handlers:
+      python:
+        # https://mkdocstrings.github.io/python/usage/#configuration
+        paths: [src]
+        import:
+          - https://docs.python.org/3/objects.inv
+          - https://numpy.org/doc/stable/objects.inv
+          - https://docs.scipy.org/doc/scipy/objects.inv
+          - https://pandas.pydata.org/docs/objects.inv
+        options:
+          # NOTE: some options are not available for free, e.g. `show_inheritance_diagram` and `summary`. 
+          # Members options
+          members_order: source
+          filters: ["!^_[^_]", "!^__all__$", "!^logger$"] # exclude private objects, "__all__" and "logger" 
+          # Docstrings options
+          docstring_section_style: list
+          docstring_options:
+            ignore_init_summary: true
+          merge_init_into_class: true
+          show_if_no_docstring: true
+          # Signatures/annotations options
+          show_signature_annotations: true
+          signature_crossrefs: true
+          separate_signature: true
+          # Headings options
+          show_root_heading: true
+          show_symbol_type_heading: true
+          show_symbol_type_toc: true
