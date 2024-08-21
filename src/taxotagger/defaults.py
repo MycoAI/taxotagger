@@ -28,6 +28,14 @@ PRETRAINED_MODELS = {
 }
 """The dictionary of pretrained models and their download URLs."""
 
-
 TAXONOMY_LEVELS = ["phylum", "class", "order", "family", "genus", "species"]
 """The list of taxonomy level names used in this package."""
+
+MAX_BATCH_SIZE_BYTES = 64 * 1024 * 1024
+"""The maximum batch size in bytes for the Milvus database.
+
+Milvus has a limit of 64MB for input and output per RPC operation, including insert, search, and
+query operations.
+
+For more information, see the Milvus documentation: https://milvus.io/docs/limitations.md.
+"""
