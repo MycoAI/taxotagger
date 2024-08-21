@@ -1,5 +1,6 @@
 import logging
 from .config import ProjectConfig
+from .logger import setup_logging
 from .taxotagger import TaxoTagger
 
 
@@ -9,4 +10,4 @@ __author__ = "Cunliang Geng"
 __email__ = "c.geng@esciencecenter.nl"
 __version__ = "0.0.1-alpha.1"
 
-__all__ = ["ProjectConfig", "TaxoTagger"]
+__all__ = ["ProjectConfig", "setup_logging", "TaxoTagger"]

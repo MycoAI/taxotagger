@@ -6,6 +6,7 @@ from pymilvus import DataType
 from pymilvus import MilvusClient
 from .config import ProjectConfig
 from .defaults import TAXONOMY_LEVELS
+from .logger import setup_logging
 from .models import ModelFactory
 
 
@@ -17,6 +18,7 @@ class TaxoTagger:
 
     def __init__(self, config: ProjectConfig) -> None:
         self.config = config
+        setup_logging(config.log_level, config.log_file, config.log_to_console)
 
     def embed(
         self,

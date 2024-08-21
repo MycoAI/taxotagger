@@ -1,5 +1,6 @@
 from __future__ import annotations
 import os
+from typing import Literal
 from pydantic import BaseModel
 from pydantic import Field
 from .defaults import DEFAULT_CACHE_DIR
@@ -23,6 +24,14 @@ class ProjectConfig(BaseModel, validate_assignment=True):
             For more information, see the PyTorch documentation:
             https://pytorch.org/docs/stable/tensor_attributes.html#torch-device.
         force_reload: Whether to force reload the model. Defaults to False.
+        log_level: The log level. Use the logging module's log level constants.
+            Valid levels are: `NOTSET`, `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`.
+            Defaults to "INFO".
+        log_file: The file to write the log to.
+            If the file is an empty string (by default), the log will not be written to a file.
+            If the file does not exist, it will be created.
+            The log will be written to the file in append mode.
+        log_to_console: Whether to log to the console. Defaults to True.
 
     Examples:
         # Get the default configuration
@@ -40,3 +49,8 @@ class ProjectConfig(BaseModel, validate_assignment=True):
     )
     device: str = Field(default="cpu", min_length=1)
     force_reload: bool = Field(default=False, strict=True)
+    log_level: Literal["NONSET", "DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = Field(
+        default="INFO"
+    )
+    log_file: str = Field(default="")
+    log_to_console: bool = Field(default=True, strict=True)
