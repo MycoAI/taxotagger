@@ -1,17 +1,19 @@
 # TaxoTagger
 
  [![pypi badge](https://img.shields.io/pypi/v/taxotagger.svg?color=blue)](https://pypi.python.org/project/taxotagger/)
+ [![Static Badge](https://img.shields.io/badge/🍄_Docs_🍄-826644)](https://mycoai.github.io/taxotagger)[](https://mycoai.github.io/taxotagger)
 
-Fungi DNA taxonomy label identification using semantic searching.
+TaxoTagger is a Python library for DNA barcode identification, powered by semantic searching.
 
 Features:
-- Building vector databases directly from DNA sequences (FASTA file) with ease
-- Supporting various embedding models
-- Semantic searching with high efficiency
+- 🚀 Effortlessly build vector databases from DNA sequences (FASTA files)
+- ⚡  Achieve highly efficient and accurate semantic searching
+- 🔥 Easily extend support for various embedding models
+
 
 ## Installation
 
-Install from PyPI:
+TaxoTagger requires Python 3.10 or later.
 
 ```bash
 # create an virtual environment
@@ -22,15 +24,6 @@ conda activate venv-3.10
 pip install --pre taxotagger
 ```
 
-Or install from source code:
-```bash
-# create an virtual environment
-conda create -n venv-3.10 python=3.10
-conda activate venv-3.10
-
-# install from this repo
-pip install git+https://github.com/MycoAI/taxotagger
-```
 
 ## Usage
 
@@ -47,7 +40,7 @@ tt = TaxoTagger(config)
 tt.create_db('data/database.fasta')
 ```
 
-By default, the model [MycoAI-CNN.pt](https://zenodo.org/records/10904344) will be used as the embedding model, and the database will be created and stored in the default folder (`~/.cache/mycoai`) if you do not set a new value to `config.mycoai_home`. The embedding model is automatically downloaded to  there.
+By default,  the `~/.cache/mycoai` folder is used to store the vector database and the embedding model. The [`MycoAI-CNN.pt`](https://zenodo.org/records/10904344) model is automatically downloaded to this folder if it is not there, and the vector database is created and named after the model.
 
 
 ### Conduct a semantic search with FASTA file
@@ -62,7 +55,9 @@ tt = TaxoTagger(config)
 res = tt.search('data/query.fasta', limit = 1)
 ```
 
-The search results `res` will be a dictionary with taxonomic level names as keys and matched results as values for each query sequence. For example, `res['phylum']` will look like:
+The [`data/query.fasta` file](data/query.fasta) contains two query sequences: `KY106088` and `KY106087`. 
+
+The search results `res` will be a dictionary with taxonomic level names as keys and matched results as values for each of the two query sequences. For example, `res['phylum']` will look like:
 
 ```python
 [
@@ -73,6 +68,14 @@ The search results `res` will be a dictionary with taxonomic level names as keys
 
 The first inner list is the top results for the first query sequence, and the second inner list is the top results for the second query sequence.
 
+We can see that the top 1 results for both query sequences are exactly themselves. This is because the query sequences are also in the database. You can try with different query sequences to see the search results.
 
-# Question and feedback
+
+## Docs
+Please visit the [official documentation](https://mycoai.github.io/taxotagger) for more details.
+
+## Question and feedback
 Please submit [an issue](https://github.com/MycoAI/taxotagger/issues) if you have any question or feedback.
+
+## Citation
+If you use TaxoTagger in your work, please cite it by clicking the `Cite this repository` on right top of this page.
