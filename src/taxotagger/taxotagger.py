@@ -17,7 +17,7 @@ class TaxoTagger:
     """The taxonomy tagger class."""
 
     def __init__(self, config: ProjectConfig) -> None:
-        self.config = config
+        self._config = config
         setup_logging(config.log_level, config.log_file, config.log_to_console)
 
     def embed(
@@ -64,7 +64,7 @@ class TaxoTagger:
             >>> tagger = TaxoTagger(config)
             >>> embeddings = tagger.embed("dna1.fasta")
         """
-        model = ModelFactory.get_model(model_id, self.config)
+        model = ModelFactory.get_model(model_id, self._config)
         return model.embed(fasta_file)
 
     def search(
@@ -124,7 +124,7 @@ class TaxoTagger:
         output_fields = output_taxonomies + output_metadata
 
         db_name = db_name if db_name else f"{model_id}.db"
-        db_path = os.path.join(self.config.mycoai_home, db_name)
+        db_path = os.path.join(self._config.mycoai_home, db_name)
         # TODO: Check if the database exists and download it if it does not exist
 
         client = MilvusClient(db_path)
@@ -165,7 +165,7 @@ class TaxoTagger:
         schema_index_dict = self._create_schema_index(dims)
 
         db_name = db_name if db_name else f"{model_id}.db"
-        db_path = os.path.join(self.config.mycoai_home, db_name)
+        db_path = os.path.join(self._config.mycoai_home, db_name)
 
         client = MilvusClient(db_path)
 
