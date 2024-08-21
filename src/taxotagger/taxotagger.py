@@ -64,6 +64,9 @@ class TaxoTagger:
             >>> tagger = TaxoTagger(config)
             >>> embeddings = tagger.embed("dna1.fasta")
         """
+        logger.info(
+            f"Embedding the DNA sequences in [magenta]{fasta_file}[/magenta] using the model [magenta]{model_id}[/magenta]"
+        )
         model = ModelFactory.get_model(model_id, self._config)
         return model.embed(fasta_file)
 
@@ -127,9 +130,13 @@ class TaxoTagger:
         db_path = os.path.join(self._config.mycoai_home, db_name)
         # TODO: Check if the database exists and download it if it does not exist
 
+        logger.info(
+            f"Searching the DNA sequences in [magenta]{fasta_file}[/magenta] in the database {db_path}"
+        )
         client = MilvusClient(db_path)
         results = {}
         for taxo_level in output_taxonomies:
+            logger.debug(f"Searching in the collection [blue1]{taxo_level}[/blue1]")
             res = client.search(
                 collection_name=taxo_level,
                 data=[d["vector"] for d in query_embedding[taxo_level]],
@@ -169,6 +176,9 @@ class TaxoTagger:
 
         client = MilvusClient(db_path)
 
+        logger.info(
+            f"Creating a vector database for the DNA sequences in [magenta]{fasta_file}[/magenta] at {db_path}"
+        )
         # Create collections for each taxonomy level
         for taxo_level in TAXONOMY_LEVELS:
             schema, index_params = schema_index_dict[taxo_level]

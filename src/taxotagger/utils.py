@@ -1,4 +1,5 @@
 from __future__ import annotations
+import logging
 import os
 from os import PathLike
 from pathlib import Path
@@ -8,6 +9,9 @@ import torch
 from rich.progress import Progress
 from .config import ProjectConfig
 from .defaults import PRETRAINED_MODELS
+
+
+logger = logging.getLogger(__name__)
 
 
 def download_from_url(
@@ -90,6 +94,7 @@ def load_model(
     if not model_path.exists() or config.force_reload:
         download_from_url(PRETRAINED_MODELS[model_id], model_dir, config.force_reload)
 
+    logger.info(f"Loading model [magenta]{model_id}[/magenta] from {model_path}")
     model = torch.load(model_path, map_location=config.device)
     return model
 
