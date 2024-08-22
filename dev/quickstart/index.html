@@ -914,6 +914,7 @@
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">]</span>
 </code></pre></div>
 <p>The first inner list is the top results for the first query sequence, and the second inner list is the top results for the second query sequence.</p>
+<p>The <code>id</code> field is the sequence ID of the matched sequence. The <code>distance</code> field is the cosine similarity between the query sequence and the matched sequence with a value between 0 and 1, the closer to 1, the more similar. The <code>entity</code> field is the taxonomic information of the matched sequence. </p>
 <p>We can see that the top 1 results for both query sequences are exactly themselves. This is because the query sequences are also in the database. You can try with different query sequences to see the search results.</p>
 <h2 id="project-configuration">Project Configuration<a class="headerlink" href="#project-configuration" title="Permanent link">&para;</a></h2>
 <p>The <a class="autorefs autorefs-internal" href="../api/config/#taxotagger.ProjectConfig"><code>ProjectConfig</code> class</a> is used to configure the project settings. </p>
