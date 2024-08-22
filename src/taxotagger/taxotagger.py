@@ -29,28 +29,30 @@ class TaxoTagger:
     ) -> dict[str, list[dict[str, Any]]]:
         """Embed the DNA sequences in the fasta file using the specified model.
 
-        This is a wrapper function for the `embed` method of each embedding model.
-        See the `models` module for more details on each model.
+        This is a wrapper function for the [`embed` method][taxotagger.abc.EmbedModelBase.embed] of
+        each embedding model. See the [`models` module][taxotagger.models] for more details for each
+        model.
 
         Args:
-            fasta_file (str): The path to the fasta file.
-            model_id (str): The model ID to use for embedding the DNA sequences.
+            fasta_file: The path to the fasta file.
+            model_id: The model ID to use for embedding the DNA sequences.
 
         Returns:
-            dict[str, list[dict[str, Any]]]: A dictionary of embeddings for each taxonomy level.
-                The dictionary keys are the taxonomy levels, and the values are lists of dictionaries
-                containing the id, embeddings and metadata for each sequence.
+            A dictionary of embeddings for each taxonomy level.
+                The dictionary keys are the [taxonomy levels][taxotagger.defaults.TAXONOMY_LEVELS],
+                and the values are lists of dictionaries containing the id, embeddings and metadata
+                for each sequence.
 
-                The shape of the list is (n_samples), where n_samples is the number of sequences.
+                The shape of the list is `(n_samples)`, where `n_samples` is the number of sequences.
 
-                The keys of the inside dictionaries are: "id", "vector", taxonomy levels ("phylum",
-                "class", "order", "family", "genus", and "species"), and other metadata fields.
+                The keys of the inside dictionaries are: `id`, `vector`, taxonomy levels (`phylum`,
+                `class`, `order`, `family`, `genus`, `species`), and other metadata fields.
 
-                The shape of the "vector" is (n_features), where n_features is the number of features
-                in the embedding.
+                The shape of the `vector` is `(n_features)`, where `n_features` is the number of
+                features in the embedding.
 
                 The returned data looks like:
-                ```
+                ```python
                 {
                 "phylum": [{"id": "seq1", "vector": [0.1, 0.2, ...], "phylum": "Basidiomycota", ...}, ...],
                 "class": [{"id": "seq1", "vector": [0.5, 0.6, ...], "class": "Agaricomycetes", ...}, ...],
@@ -79,9 +81,9 @@ class TaxoTagger:
         output_metadata: list = [],
         model_id: str = "MycoAI-CNN",
         db_name: str = "",
-        **kwargs,
+        **kwargs: Any,
     ) -> dict[str, list[list[dict]]]:
-        """Conduct a vector similarity search for the DNA sequences in the fasta file.
+        """Conduct a semantic search for the DNA sequences in the fasta file.
 
         Args:
             fasta_file: The path to the fasta file.
@@ -100,13 +102,13 @@ class TaxoTagger:
                 https://milvus.io/api-reference/pymilvus/v2.4.x/MilvusClient/Vector/search.md.
 
         Returns:
-            dict[str, list[list[dict]]]: A dictionary of search results for each taxonomy level
-                defined in `output_taxonomies`. The dictionary keys are the taxonomy levels, and
-                the values are a list of search results (`list[dict]`) for each sequence.
+            A dictionary of search results for each taxonomy level defined in `output_taxonomies`.
+                The dictionary keys are the taxonomy levels, and the values are a list of search
+                results (`list[dict]`) for each sequence.
 
                 The search result for one sequence is a list of dictionaries, where the length of
                 the list is the `limit` you set in the search, by default it is 10, i.e. the top 10
-                matched sequences.
+                matched results.
 
         Examples:
             >>> config = ProjectConfig()

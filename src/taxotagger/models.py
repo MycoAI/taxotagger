@@ -23,7 +23,7 @@ class ModelFactory:
             config: The configurations for the project.
 
         Returns:
-            EmbedModelBase: The embedding model instance for the given model identifier.
+            The embedding model instance for the given model identifier.
 
         Examples:
             >>> config = ProjectConfig()
@@ -50,7 +50,7 @@ class MycoAICNNEmbedModel(EmbedModelBase):
     name = "MycoAI-CNN"
 
     def __init__(self, config: ProjectConfig) -> None:
-        self.config = config
+        self._config = config
         self.model = load_model(self.name, config)
 
     def embed(self, fasta_file: str) -> dict[str, list[dict[str, Any]]]:
@@ -60,26 +60,28 @@ class MycoAICNNEmbedModel(EmbedModelBase):
             fasta_file: The path to the FASTA file to embed.
 
         Returns:
-            dict[str, list[dict[str, Any]]]: A dictionary of embeddings for each taxonomy level.
+            A dictionary of embeddings for each taxonomy level.
                 The dictionary keys are the taxonomy levels, and the values are lists of dictionaries
                 containing the id, embeddings and metadata for each sequence.
 
-                The shape of the list is (n_samples), where n_samples is the number of sequences.
+                The shape of the list is `(n_samples)`, where `n_samples` is the number of sequences.
 
-                The keys of the inside dictionaries are: "id", "vector", "SH_id", and the taxonomy
-                levels including "phylum", "class", "order", "family", "genus", and "species".
+                The keys of the inside dictionaries are: `id`, `vector`, and the taxonomy levels
+                (e.g. `phylum`, `class`, `order`, `family`, `genus`, `species`) and other metadata
+                fields present in the FASTA header.
 
-                The shape of the "vector" is (n_features), where n_features is the number of features
-                in the embedding. The number of features for each taxonomy level is:
-                - phylum: 18
-                - class: 70
-                - order: 231
-                - family: 791
-                - genus: 3695
-                - species: 14742
+                The shape of the `vector` is `(n_features)`, where `n_features` is the number of
+                features in the embedding. The number of features for each taxonomy level is:
+
+                    - phylum: 18
+                    - class: 70
+                    - order: 231
+                    - family: 791
+                    - genus: 3695
+                    - species: 14742
 
                 The returned data looks like:
-                ```
+                ```python
                 {
                 "phylum": [{"id": "seq1", "vector": [0.1, 0.2, ...], "phylum": "Basidiomycota", ...}, ...],
                 "class": [{"id": "seq1", "vector": [0.5, 0.6, ...], "class": "Agaricomycetes", ...}, ...],
@@ -103,7 +105,7 @@ class MycoAICNNEmbedModel(EmbedModelBase):
         dataloader = DataLoader(encoded_data, shuffle=False)
         with torch.no_grad():
             for x, _ in dataloader:  # (encoded data, labels)
-                y_pred = self.model(x.to(self.config.device))
+                y_pred = self.model(x.to(self._config.device))
                 embeddings.append(y_pred)
         # embeddings shape (n_samples, n_taxonomies, (1, n_features)), where n_taxonomies is 6, e.g.
         # [[phylumTensor1, classTensor1, orderTensor1, familyTensor1, genusTensor1, speciesTensor1], ...]
@@ -133,8 +135,7 @@ class MycoAICNNEmbedModel(EmbedModelBase):
             fasta_file: The path to the FASTA file.
 
         Returns:
-            tuple[list[list[str]], data.TensorData]: A tuple containing the headers and the encoded
-                data for the sequences in the FASTA file.
+            A tuple containing the headers and the encoded data for the sequences in the FASTA file.
 
                 The shape of the headers is `(n_samples, n_headers)`, where `n_samples` is the
                 number of sequences and `n_headers` is the 9 metadata fields parsed from the header.

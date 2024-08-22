@@ -23,7 +23,7 @@ def download_from_url(
 ) -> str:
     """Download data from the given URL.
 
-    The output file name is determined by the URL and saved to the given root directory.
+    The output file name is determined by the URL and saved to the given `root` directory.
 
     Args:
         url: The URL of the file to download.
@@ -66,8 +66,9 @@ def load_model(
 ) -> Any:
     """Load the pretrained model with pytorch for the given model identifier.
 
-    Available models are define in the defaults `PRETRAINED_MODELS`.
-    If the model "{model_id}.pt" is not found in the cache, it will be downloaded from the
+    Available models are defined in the default
+    [`PRETRAINED_MODELS`][taxotagger.defaults.PRETRAINED_MODELS].
+    If the model `{model_id}.pt` is not found in the cache, it will be downloaded from the
     predefined URL.
 
     Args:
@@ -75,7 +76,7 @@ def load_model(
         config: The configurations for the project.
 
     Returns:
-        Any: The pretrained model loaded with `torch.load`.
+        The pretrained model loaded with `torch.load`.
 
     Examples:
         >>> config = Config()
@@ -103,10 +104,15 @@ def parse_unite_fasta_header(header: str) -> list[str]:
     """Parse metadata from a UNITE FASTA file header.
 
     The header of a FASTA file must follow the formats:
+
     - the UNITE format:
-        `>Accession|k__Kingdom;p__Phylum;c__Class;o__Order;f__Family;g__Genus;s__Species|SHIdentifier`
+        ```
+        >Accession|k__Kingdom;p__Phylum;c__Class;o__Order;f__Family;g__Genus;s__Species|SHIdentifier
+        ```
     - only the accession:
-        `>Accession`
+        ```
+        >Accession
+        ```
 
     Note that the `SHIdentifier` (Species Hypothesis identifier) is optional.
 
@@ -114,15 +120,17 @@ def parse_unite_fasta_header(header: str) -> list[str]:
         header: A string representing the header of a FASTA file from the UNITE database.
 
     Returns:
-        list[str]: A list of parsed metadata in the following order:
+        A list of parsed metadata in the following order:
             `[Accession, Kingdom, Phylum, Class, Order, Family, Genus, Species, SH_ID]`.
             Empty strings are returned for missing metadata.
 
     Examples:
-        >> header = ">MH855962|k__Fungi;p__Basidiomycota;c__Agaricomycetes;o__Corticiales;f__Corticiaceae;g__Waitea;s__Waitea_circinata|SH1011630.09FU"
+        Parse the header of a UNITE FASTA file
+        >>> header = ">MH855962|k__Fungi;p__Basidiomycota;c__Agaricomycetes;o__Corticiales;f__Corticiaceae;g__Waitea;s__Waitea_circinata|SH1011630.09FU"
         >>> parse_unite_fasta_header(header)
         ['MH855962', 'Fungi', 'Basidiomycota', 'Agaricomycetes', 'Corticiales', 'Corticiaceae', 'Waitea', 'Waitea_circinata', 'SH1011630.09FU']
 
+        Parse the header of a FASTA file with only the accession
         >>> process_unite_fasta_header(">MH855962")
         ['MH855962', '', '', '', '', '', '', '', '']
     """

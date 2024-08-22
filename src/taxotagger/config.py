@@ -12,26 +12,28 @@ class ProjectConfig(BaseModel, validate_assignment=True):
 
     Attributes:
         mycoai_home: The working directory for the project. Downloads and cache files are stored
-            here. Defaults to "~/.cache/mycoai".
+            here. Defaults to `~/.cache/mycoai`.
+
             You can also set the `MYCOAI_HOME` environment variable to override this, e.g.
             on Linux or macOS: `export MYCOAI_HOME="~/mycoai"`.
-        device: The device to run the model on. Defaults to "cpu".
+        device: The device to run the model on. Defaults to `"cpu"`.
+
             Available options are:
-                - "cpu": when no GPU is available,
-                - "cuda": when NVIDIA GPUs are available, use "cuda:0" to use the first GPU
-                - "mps": when Mac GPUs are available
-                - and any other valid PyTorch device
-            For more information, see the PyTorch documentation:
-            https://pytorch.org/docs/stable/tensor_attributes.html#torch-device.
-        force_reload: Whether to force reload the model. Defaults to False.
-        log_level: The log level. Use the logging module's log level constants.
-            Valid levels are: `NOTSET`, `DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`.
-            Defaults to "INFO".
+
+            - `"cpu"`: when no GPU is available,
+            - `"cuda"`: when NVIDIA GPUs are available, use "cuda:0" to use the first GPU
+            - `"mps"`: when Mac GPUs are available
+            - and any other valid PyTorch device
+
+            For more information, see the
+            [PyTorch documentation](https://pytorch.org/docs/stable/tensor_attributes.html#torch-device).
+        force_reload: Whether to force reload the model. Defaults to `False`.
+        log_level: The log level. Use the logging module's log level constants. Defaults to `"INFO"`.
         log_file: The file to write the log to.
             If the file is an empty string (by default), the log will not be written to a file.
             If the file does not exist, it will be created.
             The log will be written to the file in append mode.
-        log_to_console: Whether to log to the console. Defaults to True.
+        log_to_console: Whether to log to the console. Defaults to `True`.
 
     Examples:
         # Get the default configuration
