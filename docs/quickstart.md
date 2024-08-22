@@ -73,6 +73,8 @@ The search results `res` will be a dictionary with [taxonomic level names][taxot
 
 The first inner list is the top results for the first query sequence, and the second inner list is the top results for the second query sequence.
 
+The `id` field is the sequence ID of the matched sequence. The `distance` field is the cosine similarity between the query sequence and the matched sequence with a value between 0 and 1, the closer to 1, the more similar. The `entity` field is the taxonomic information of the matched sequence. 
+
 We can see that the top 1 results for both query sequences are exactly themselves. This is because the query sequences are also in the database. You can try with different query sequences to see the search results.
 
 
