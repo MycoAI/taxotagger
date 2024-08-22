@@ -48,7 +48,7 @@ clean-venv:
 
 
 # Define the files to update version
-FILES := src/taxotagger/__init__.py pyproject.toml CITATION.cff
+FILES := src/taxotagger/__init__.py pyproject.toml CITATION.cff docs/index.md
 
 # Rule to update the version in the specified files
 update-version:
@@ -59,7 +59,7 @@ ifndef NEW_VERSION
 	$(error NEW_VERSION is not provided. Usage: make update-version CURRENT_VERSION=0.1.0 NEW_VERSION=0.2.0)
 endif
 	@for file in $(FILES); do \
-		if ! grep -qE "__version__ = \"$(CURRENT_VERSION)\"|version = \"$(CURRENT_VERSION)\"|version: \"$(CURRENT_VERSION)\"" $$file; then \
+		if ! grep -qE "__version__ = \"$(CURRENT_VERSION)\"|version = \"$(CURRENT_VERSION)\"|version: \"$(CURRENT_VERSION)\"|version = \{$(CURRENT_VERSION)\}" $$file; then \
 			echo "Error: Current version $(CURRENT_VERSION) not found in $$file"; \
 			exit 1; \
 		fi; \
@@ -71,11 +71,15 @@ endif
 		if [ "$(shell uname)" = "Darwin" ]; then \
 			sed -i '' -e 's/__version__ = "$(CURRENT_VERSION)"/__version__ = "$(NEW_VERSION)"/' \
 				-e 's/version = "$(CURRENT_VERSION)"/version = "$(NEW_VERSION)"/' \
-				-e 's/version: "$(CURRENT_VERSION)"/version: "$(NEW_VERSION)"/' $$file; \
+				-e 's/version: "$(CURRENT_VERSION)"/version: "$(NEW_VERSION)"/' \
+				-e 's/version = {$(CURRENT_VERSION)}/version = {$(NEW_VERSION)}/' \
+				$$file; \
 		else \
 			sed -i'' -e 's/__version__ = "$(CURRENT_VERSION)"/__version__ = "$(NEW_VERSION)"/' \
 				-e 's/version = "$(CURRENT_VERSION)"/version = "$(NEW_VERSION)"/' \
-				-e 's/version: "$(CURRENT_VERSION)"/version: "$(NEW_VERSION)"/' $$file; \
+				-e 's/version: "$(CURRENT_VERSION)"/version: "$(NEW_VERSION)"/' \
+				-e 's/version = {$(CURRENT_VERSION)}/version = {$(NEW_VERSION)}/' \
+				$$file; \
 		fi; \
 	done
 	@echo "Version update complete."
