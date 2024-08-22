@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://taxotagger.github.io/taxotagger/latest/</loc>
+         <loc>https://mycoai.github.io/taxotagger/latest/</loc>
          <lastmod>2024-08-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://taxotagger.github.io/taxotagger/latest/install/</loc>
+         <loc>https://mycoai.github.io/taxotagger/latest/install/</loc>
          <lastmod>2024-08-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://taxotagger.github.io/taxotagger/latest/quickstart/</loc>
+         <loc>https://mycoai.github.io/taxotagger/latest/quickstart/</loc>
          <lastmod>2024-08-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://taxotagger.github.io/taxotagger/latest/api/abc/</loc>
+         <loc>https://mycoai.github.io/taxotagger/latest/api/abc/</loc>
          <lastmod>2024-08-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://taxotagger.github.io/taxotagger/latest/api/config/</loc>
+         <loc>https://mycoai.github.io/taxotagger/latest/api/config/</loc>
          <lastmod>2024-08-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://taxotagger.github.io/taxotagger/latest/api/defaults/</loc>
+         <loc>https://mycoai.github.io/taxotagger/latest/api/defaults/</loc>
          <lastmod>2024-08-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://taxotagger.github.io/taxotagger/latest/api/logger/</loc>
+         <loc>https://mycoai.github.io/taxotagger/latest/api/logger/</loc>
          <lastmod>2024-08-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://taxotagger.github.io/taxotagger/latest/api/models/</loc>
+         <loc>https://mycoai.github.io/taxotagger/latest/api/models/</loc>
          <lastmod>2024-08-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://taxotagger.github.io/taxotagger/latest/api/taxotagger/</loc>
+         <loc>https://mycoai.github.io/taxotagger/latest/api/taxotagger/</loc>
          <lastmod>2024-08-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://taxotagger.github.io/taxotagger/latest/api/utils/</loc>
+         <loc>https://mycoai.github.io/taxotagger/latest/api/utils/</loc>
          <lastmod>2024-08-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://taxotagger.github.io/taxotagger/latest/guide/custom_models/</loc>
+         <loc>https://mycoai.github.io/taxotagger/latest/guide/custom_models/</loc>
          <lastmod>2024-08-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://taxotagger.github.io/taxotagger/latest/guide/logging/</loc>
+         <loc>https://mycoai.github.io/taxotagger/latest/guide/logging/</loc>
          <lastmod>2024-08-22</lastmod>
          <changefreq>daily</changefreq>
     </url>
