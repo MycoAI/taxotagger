@@ -35,7 +35,8 @@ theme:
     logo: 'material/library-outline'
     previous: fontawesome/solid/angle-left
     next: fontawesome/solid/angle-right
-  favicon: 'favicon.png'
+  favicon: images/logo.svg
+  logo: images/logo.svg
 
 repo_name: MycoAI/taxotagger
 repo_url: https://github.com/MycoAI/taxotagger
