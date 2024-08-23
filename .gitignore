@@ -52,3 +52,6 @@ venv3
 ENV/
 env.bak/
 venv.bak/
+
+# mkdocs 
+site/
