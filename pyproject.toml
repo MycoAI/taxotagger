@@ -43,6 +43,7 @@ dev = [
     # testing
     "pytest",
     "pytest-cov",
+    "pytest-order",
     "coverage[toml]",
     # static typing
     "mypy",
