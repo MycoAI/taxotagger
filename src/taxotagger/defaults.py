@@ -25,6 +25,7 @@ os.environ["MYCOAI_HOME"] = "~/mycoai"
 
 PRETRAINED_MODELS = {
     "MycoAI-CNN": "https://zenodo.org/records/10904344/files/MycoAI-CNN.pt",
+    "MycoAI-BERT": "https://zenodo.org/records/10904344/files/MycoAI-BERT.pt",
 }
 """Pretrained models and their download URLs."""
 
