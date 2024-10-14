@@ -35,7 +35,8 @@ class TaxoTagger:
 
         Args:
             fasta_file: The path to the fasta file.
-            model_id: The model ID to use for embedding the DNA sequences.
+            model_id: The model ID to use for embedding the DNA sequences. Defaults to "MycoAI-CNN".
+                Available models see [`taxotagger.defaults.PRETRAINED_MODELS`][taxotagger.defaults.PRETRAINED_MODELS].
 
         Returns:
             A dictionary of embeddings for each taxonomy level.
@@ -90,6 +91,7 @@ class TaxoTagger:
             output_taxonomies: List of taxonomy levels to include in the output. Defaults to all taxonomy levels.
             output_metadata: List of metadata fields to include in the output. Defaults to an empty list.
             model_id: The model ID to use for embedding the DNA sequences. Defaults to "MycoAI-CNN".
+                Available models see [`taxotagger.defaults.PRETRAINED_MODELS`][taxotagger.defaults.PRETRAINED_MODELS].
             db_name: The name of the database to search. Defaults to the model ID.
             kwargs: Additional keyword arguments to pass to the `search` method of the Milvus client.
                 For example:
@@ -177,6 +179,7 @@ class TaxoTagger:
         Args:
             fasta_file: The path to the fasta file.
             model_id: The model ID to use for embedding the DNA sequences. Defaults to "MycoAI-CNN".
+                Available models see [`taxotagger.defaults.PRETRAINED_MODELS`][taxotagger.defaults.PRETRAINED_MODELS].
             db_name: The name of the database to create. Defaults to the model ID.
 
         Examples:
