@@ -20,7 +20,7 @@ Features:
     license = {Apache-2.0},
     title = {{TaxoTagger}},
     url = {https://github.com/MycoAI/taxotagger},
-    version = {0.0.1-alpha.2}
+    version = {0.0.1-alpha.4}
     }
 
     ```
