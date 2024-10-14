@@ -55,3 +55,7 @@ venv.bak/
 
 # mkdocs 
 site/
+
+# downloaded data
+tests/data/MycoAI-CNN.*
+tests/data/MycoAI-BERT.*

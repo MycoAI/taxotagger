@@ -22,6 +22,7 @@ def setup_logging(
     # Get the ancestor logger "taxotagger"
     logger = logging.getLogger("taxotagger")
     logger.setLevel(level)
+    logger.handlers.clear()
 
     # File handler
     if file:
