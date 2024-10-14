@@ -492,6 +492,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Custom Embedding Models
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -501,6 +512,34 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -749,6 +788,23 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -767,10 +823,12 @@
 
 <h1 id="custom-embedding-models">Custom Embedding Models<a class="headerlink" href="#custom-embedding-models" title="Permanent link">&para;</a></h1>
 <p>You can use your own embedding model with TaxoTagger. This guide will show you how to integrate your model with TaxoTagger.</p>
-<div class="admonition tip">
-<p class="admonition-title">Under development</p>
-<p>This guide is under development. Please check back later.</p>
-</div>
+<h2 id="steps">Steps<a class="headerlink" href="#steps" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Add the name of the embedding model and the link to download the model to the constant variable <code>PRETRAINED_MODELS</code> in the <code>taxotagger.defaults</code> module.</li>
+<li>Add a new wrapper class for the embedding model by implementing the <code>EmbedModelBase</code> interface in the <code>taxotagger.abc</code> module. There you need to implement the <code>embed</code> method to calculate the embeddings for the given FASTA file.</li>
+<li>Add the new wrapper class to the <code>ModelFactory.get_model</code> method in the <code>taxotagger.models</code> module.</li>
+</ol>
 
 
 
