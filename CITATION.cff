@@ -8,7 +8,7 @@ authors:
     family-names: Geng
     affiliation: "Netherlands eScience Center"
     orcid: "https://orcid.org/0000-0002-1409-8358"
-version: "0.0.1-alpha.4"
+version: "0.0.1-alpha.5"
 repository-code: "https://github.com/MycoAI/taxotagger"
 keywords:
   - Machine Learning

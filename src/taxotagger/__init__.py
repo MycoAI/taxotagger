@@ -8,6 +8,6 @@ logging.getLogger(__name__).addHandler(logging.NullHandler())
 
 __author__ = "Cunliang Geng"
 __email__ = "c.geng@esciencecenter.nl"
-__version__ = "0.0.1-alpha.4"
+__version__ = "0.0.1-alpha.5"
 
 __all__ = ["ProjectConfig", "setup_logging", "TaxoTagger"]
