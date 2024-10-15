@@ -142,7 +142,7 @@ class MycoAICNNEmbedModel(EmbedModelBase):
                 The shape of the headers is `(n_samples, n_headers)`, where `n_samples` is the
                 number of sequences and `n_headers` is the 9 metadata fields parsed from the header.
         """
-        input_data = data.Data(fasta_file, tax_parser=None, allow_duplicates=True)
+        input_data = data.Data(fasta_file, tax_parser=None, allow_duplicates=False)
         # Using custom parser to parse the FASTA headers
         headers = [parse_unite_fasta_header(header) for header in input_data.data["id"].values]
         encoded_data = input_data.encode_dataset(self.model.dna_encoder, self.model.tax_encoder)
@@ -245,7 +245,7 @@ class MycoAIBERTEmbedModel(EmbedModelBase):
                 The shape of the headers is `(n_samples, n_headers)`, where `n_samples` is the
                 number of sequences and `n_headers` is the 9 metadata fields parsed from the header.
         """
-        input_data = data.Data(fasta_file, tax_parser=None, allow_duplicates=True)
+        input_data = data.Data(fasta_file, tax_parser=None, allow_duplicates=False)
         # Using custom parser to parse the FASTA headers
         headers = [parse_unite_fasta_header(header) for header in input_data.data["id"].values]
         encoded_data = input_data.encode_dataset(self.model.dna_encoder, self.model.tax_encoder)
