@@ -1,5 +1,7 @@
 from pathlib import Path
+import pytest
 from taxotagger.utils import download_from_url
+from taxotagger.utils import parse_fasta
 from taxotagger.utils import parse_unite_fasta_header
 
 
@@ -93,3 +95,56 @@ def test_parse_unite_fasta_header_empty():
     expected = ["", "", "", "", "", "", "", "", ""]
     result = parse_unite_fasta_header(header)
     assert result == expected
+
+
+################################################################################
+# Test parse_fasta function
+################################################################################
+
+
+def test_parse_fasta_from_file_handle(tmp_path):
+    fasta_data = ">seq1\nAAATTT\n>seq2\nCCCGGG\n"
+    fasta_file = tmp_path / "test.fasta"
+    fasta_file.write_text(fasta_data)
+
+    expected = {
+        "seq1": "AAATTT",
+        "seq2": "CCCGGG",
+    }
+    with open(fasta_file, "r") as fh:
+        result = parse_fasta(fh)
+    assert result == expected
+
+
+def test_parse_fasta_from_file(tmp_path):
+    fasta_data = """>seq1\nAAATTT\n>seq2\nCCCGGG\n"""
+    fasta_file = tmp_path / "test.fasta"
+    fasta_file.write_text(fasta_data)
+
+    expected = {
+        "seq1": "AAATTT",
+        "seq2": "CCCGGG",
+    }
+    # test the Path object
+    result = parse_fasta(fasta_file)
+    assert result == expected
+
+    # test the string path
+    result = parse_fasta(str(fasta_file))
+    assert result == expected
+
+
+def test_parse_fasta_from_string_content():
+    fasta_data = ">seq1\nAAATTT\n>seq2\nCCCGGG\n"
+    expected = {
+        "seq1": "AAATTT",
+        "seq2": "CCCGGG",
+    }
+    result = parse_fasta(fasta_data)
+    assert result == expected
+
+
+def test_parse_fasta_duplicate_headers():
+    fasta_data = ">seq1\nAAATTT\n>seq2\nCCCGGG\n>seq1\nTTTAAA\n"
+    with pytest.raises(ValueError, match="Duplicate fasta header: seq1"):
+        parse_fasta(fasta_data)

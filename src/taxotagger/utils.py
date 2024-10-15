@@ -1,11 +1,14 @@
 from __future__ import annotations
 import logging
 import os
+from io import StringIO
 from os import PathLike
 from pathlib import Path
 from typing import Any
+from typing import TextIO
 import httpx
 import torch
+from Bio import SeqIO
 from rich.progress import Progress
 from .config import ProjectConfig
 from .defaults import PRETRAINED_MODELS
@@ -165,3 +168,64 @@ def parse_unite_fasta_header(header: str) -> list[str]:
         result[8] = sections[2]
 
     return result
+
+
+def parse_fasta(data: str | PathLike | TextIO) -> dict:
+    """Parse  FASTA data and return a dictionary of sequences.
+
+    Args:
+        data: Can be one of the following:
+
+            - A file-like object (with .read() or .readline() methods)
+            - A file path (string or PathLike) to a FASTA file
+            - A string containing FASTA content
+
+    Returns:
+        A dictionary with the FASTA headers as keys and the sequences as values.
+
+    Raises:
+        ValueError: If there are duplicate FASTA headers.
+    """
+    id_seq_dict = {}
+
+    fh = _fasta_to_handle(data)
+    for record in SeqIO.parse(fh, "fasta"):
+        if record.id not in id_seq_dict:
+            id_seq_dict[record.id] = str(record.seq)
+        else:
+            raise ValueError(f"Duplicate fasta header: {record.id}")
+    return id_seq_dict
+
+
+def _fasta_to_handle(data: str | PathLike | TextIO) -> TextIO:
+    """Convert the input FASTA data to a file handle.
+
+    Args:
+        data: Can be one of the following:
+
+            - A file-like object (with .read() or .readline() methods)
+            - A file path (string or PathLike) to a FASTA file
+            - A string containing FASTA content
+
+    Returns:
+        A file handle for the input data.
+
+    Raises:
+        TypeError: If the input data is not a valid type.
+    """
+    # Check if input_data is a file-like object
+    if hasattr(data, "read") or hasattr(data, "readline"):
+        file_handle = data
+    elif isinstance(data, PathLike):
+        file_handle = open(data, "r")
+    elif isinstance(data, str):
+        # Check if it's a file path
+        if os.path.isfile(data):
+            file_handle = open(data, "r")
+        else:
+            # Assume it's a string with FASTA content
+            file_handle = StringIO(data)
+    else:
+        raise TypeError("Invalid input data type.")
+
+    return file_handle
