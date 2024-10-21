@@ -78,7 +78,7 @@ The `id` field is the sequence ID of the matched sequence. The `distance` field 
 We can see that the top 1 results for both query sequences are exactly themselves. This is because the query sequences are also in the database. You can try with different query sequences to see the search results.
 
 
-## Project Configuration
+## Project configuration
 
 The [`ProjectConfig` class][taxotagger.ProjectConfig] is used to configure the project settings. 
 
@@ -134,3 +134,8 @@ tt = TaxoTagger(config)
     The settings are read only when creating the `TaxoTagger` instance. 
     
     So if you change the settings after creating the instance, the changes will not take effect. You need to create a new `TaxoTagger` instance with the updated settings.
+
+
+## Use custom embedding models
+
+You can use your own embedding models with TaxoTagger. For that, please check the [Custom Embedding Models][custom-embedding-models] guide.

@@ -6,8 +6,7 @@ Features:
 
 - 🚀 Effortlessly build vector databases from DNA sequences (FASTA files)
 - ⚡  Achieve highly efficient and accurate semantic searching
-- 🔥 Easily extend support for various embedding models
-
+- 🔥 Easily extend support for various embedding models (PyTorch models)
 
 
 ???- Quote "Citation"
