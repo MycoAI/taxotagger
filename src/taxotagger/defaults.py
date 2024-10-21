@@ -27,7 +27,12 @@ PRETRAINED_MODELS = {
     "MycoAI-CNN": "https://zenodo.org/records/10904344/files/MycoAI-CNN.pt",
     "MycoAI-BERT": "https://zenodo.org/records/10904344/files/MycoAI-BERT.pt",
 }
-"""Pretrained models and their download URLs."""
+"""Pretrained models and their download URLs.
+
+The keys are the model names, and the values are the download URLs. The names should be unique and 
+should not contain any spaces. The download URLs should be direct download links to the model files,
+and the name of the downloaded file should be the same as the model name.
+"""
 
 TAXONOMY_LEVELS = ["phylum", "class", "order", "family", "genus", "species"]
 """The list of taxonomy level names used in this package."""

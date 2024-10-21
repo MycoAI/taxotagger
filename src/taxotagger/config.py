@@ -36,11 +36,11 @@ class ProjectConfig(BaseModel, validate_assignment=True):
         log_to_console: Whether to log to the console. Defaults to `True`.
 
     Examples:
-        # Get the default configuration
+        Get the default configuration
         >>> config = ProjectConfig()
         >>> print(config)
 
-        # Set the working directory to "~/mycoai"
+        Set the working directory to "~/mycoai"
         >>> config = ProjectConfig(mycoai_home="~/mycoai")
         >>> print(config.mycoai_home)
     """
