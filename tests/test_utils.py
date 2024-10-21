@@ -146,5 +146,5 @@ def test_parse_fasta_from_string_content():
 
 def test_parse_fasta_duplicate_headers():
     fasta_data = ">seq1\nAAATTT\n>seq2\nCCCGGG\n>seq1\nTTTAAA\n"
-    with pytest.raises(ValueError, match="Duplicate fasta header: seq1"):
+    with pytest.raises(ValueError, match="Duplicate FASTA header found: `seq1`"):
         parse_fasta(fasta_data)
