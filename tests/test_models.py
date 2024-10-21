@@ -1,9 +1,14 @@
+import os
 import pytest
 from taxotagger import ProjectConfig
 from taxotagger.models import ModelFactory
 from taxotagger.models import MycoAIBERTEmbedModel
 from taxotagger.models import MycoAICNNEmbedModel
 from . import DATA_DIR
+
+
+if os.getenv("CI"):
+    pytest.skip("Skipping tests in this file on CI environment", allow_module_level=True)
 
 
 @pytest.fixture

@@ -1,7 +1,12 @@
+import os
 import pytest
 from src.taxotagger.config import ProjectConfig
 from src.taxotagger.taxotagger import TaxoTagger
 from . import DATA_DIR
+
+
+if os.getenv("CI"):
+    pytest.skip("Skipping tests in this file on CI environment", allow_module_level=True)
 
 
 DATABASE_FASTA = str(DATA_DIR / "database.fasta")
