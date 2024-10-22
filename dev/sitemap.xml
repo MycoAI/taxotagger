@@ -2,62 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://mycoai.github.io/taxotagger/latest/</loc>
-         <lastmod>2024-10-14</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-10-22</lastmod>
     </url>
     <url>
          <loc>https://mycoai.github.io/taxotagger/latest/install/</loc>
-         <lastmod>2024-10-14</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-10-22</lastmod>
     </url>
     <url>
          <loc>https://mycoai.github.io/taxotagger/latest/quickstart/</loc>
-         <lastmod>2024-10-14</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-10-22</lastmod>
     </url>
     <url>
          <loc>https://mycoai.github.io/taxotagger/latest/api/abc/</loc>
-         <lastmod>2024-10-14</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-10-22</lastmod>
     </url>
     <url>
          <loc>https://mycoai.github.io/taxotagger/latest/api/config/</loc>
-         <lastmod>2024-10-14</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-10-22</lastmod>
     </url>
     <url>
          <loc>https://mycoai.github.io/taxotagger/latest/api/defaults/</loc>
-         <lastmod>2024-10-14</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-10-22</lastmod>
     </url>
     <url>
          <loc>https://mycoai.github.io/taxotagger/latest/api/logger/</loc>
-         <lastmod>2024-10-14</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-10-22</lastmod>
     </url>
     <url>
          <loc>https://mycoai.github.io/taxotagger/latest/api/models/</loc>
-         <lastmod>2024-10-14</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-10-22</lastmod>
     </url>
     <url>
          <loc>https://mycoai.github.io/taxotagger/latest/api/taxotagger/</loc>
-         <lastmod>2024-10-14</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-10-22</lastmod>
     </url>
     <url>
          <loc>https://mycoai.github.io/taxotagger/latest/api/utils/</loc>
-         <lastmod>2024-10-14</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-10-22</lastmod>
     </url>
     <url>
          <loc>https://mycoai.github.io/taxotagger/latest/guide/custom_models/</loc>
-         <lastmod>2024-10-14</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-10-22</lastmod>
     </url>
     <url>
          <loc>https://mycoai.github.io/taxotagger/latest/guide/logging/</loc>
-         <lastmod>2024-10-14</lastmod>
-         <changefreq>daily</changefreq>
+         <lastmod>2024-10-22</lastmod>
     </url>
 </urlset>
