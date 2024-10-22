@@ -21,7 +21,7 @@ For example, your custom model is named `Example-Transformer`, and the model fil
 PRETRAINED_MODELS = {
     "MycoAI-CNN": "https://zenodo.org/records/10904344/files/MycoAI-CNN.pt",
     "MycoAI-BERT": "https://zenodo.org/records/10904344/files/MycoAI-BERT.pt",
-    "Example-Transformer": "https://example.com/Example-Transformer.pt" # (1)!
+    "Example-Transformer": "https://example.com/Example-Transformer.pt"
 }
 ```
 
