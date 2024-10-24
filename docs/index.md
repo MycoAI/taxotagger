@@ -9,6 +9,11 @@ TaxoTagger is an open-source Python library for DNA taxonomy identification, whi
 - 🛠 Extend support for **custom embedding models** effortlessly
 - 🌐 Interact seamlessly through a **user-friendly web app**
 
+## Webapp Demo
+
+![webapp](https://github.com/MycoAI/taxotagger-webapp/blob/1faf3d6a13b04e51d86555f4abb66180661bce4f/images/TaxoTagger-webapp.gif?raw=true)
+
+
 ## Citation
 
 ???- Quote "Citation"

@@ -138,4 +138,11 @@ tt = TaxoTagger(config)
 
 ## Use custom embedding models
 
-You can use your own embedding models with TaxoTagger. For that, please check the [Custom Embedding Models][custom-embedding-models] guide.
+You can use your own embedding models with TaxoTagger, such as using pre-trained models like transformers or creating domain-specific embeddings to enhance search accuracy.
+For that, please check the [Custom Embedding Models][custom-embedding-models] guide.
+
+## Use webapp
+
+You can use the [TaxoTagger webapp](https://github.com/MycoAI/taxotagger-webapp) to interact with the library seamlessly. 
+The webapp provides a user-friendly interface to conduct semantic searches and visualize the search results.
+On how to deploy and use the webapp, please check the [TaxoTagger Webapp][taxotagger-webapp] guide.

@@ -59,6 +59,7 @@ nav:
   - About Taxotagger: index.md
   - Quick Start: quickstart.md
   - Installation: install.md
+  - Webapp: webapp.md
 - User Guide:
   - Custom Embedding Models: guide/custom_models.md
   - Logging: guide/logging.md
