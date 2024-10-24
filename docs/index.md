@@ -1,17 +1,19 @@
 # TaxoTagger
 
-TaxoTagger is a Python library for DNA barcode identification, powered by semantic searching.
+TaxoTagger is an open-source Python library for DNA taxonomy identification, which involves categorizing DNA sequences into their respective taxonomic groups. It is powered by deep learning and semantic search to provide efficient and accurate results.
 
-Features:
+## Key Features
 
-- 🚀 Effortlessly build vector databases from DNA sequences (FASTA files)
-- ⚡  Achieve highly efficient and accurate semantic searching
-- 🔥 Easily extend support for various embedding models (PyTorch models)
+- 🚀 **Build vector databases** from DNA sequences with ease
+- ⚡ Conduct **efficient semantic searches** for precise results
+- 🛠 Extend support for **custom embedding models** effortlessly
+- 🌐 Interact seamlessly through a **user-friendly web app**
 
+## Citation
 
 ???- Quote "Citation"
 
-    If you use TaxoTagger in your work, please cite it as follows:
+    If you use TaxoTagger and/or its webapp in your work, please cite it as follows:
 
     ```bibtex
     @software{Geng_TaxoTagger,
