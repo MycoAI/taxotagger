@@ -1,15 +1,16 @@
 # TaxoTagger
 
  [![pypi badge](https://img.shields.io/pypi/v/taxotagger.svg?color=blue)](https://pypi.python.org/project/taxotagger/)
- [![Static Badge](https://img.shields.io/badge/🍄_Docs_🍄-826644)](https://mycoai.github.io/taxotagger)[](https://mycoai.github.io/taxotagger)
+ [![Static Badge](https://img.shields.io/badge/🧬_Docs_🧬-826644)](https://mycoai.github.io/taxotagger)[](https://mycoai.github.io/taxotagger)
 
-TaxoTagger is a Python library for DNA barcode identification, powered by semantic searching.
+TaxoTagger is an open-source Python library for DNA taxonomy identification, which involves categorizing DNA sequences into their respective taxonomic groups. It is powered by deep learning and semantic search to provide efficient and accurate results.
 
-Features:
-- 🚀 Effortlessly build vector databases from DNA sequences (FASTA files)
-- ⚡  Achieve highly efficient and accurate semantic searching
-- 🔥 Easily extend support for various embedding models
+Key Features:
 
+- 🚀 **Build vector databases** from DNA sequences with ease
+- ⚡ Conduct **efficient semantic searches** for precise results
+- 🛠 Extend support for **custom embedding models** effortlessly
+- 🌐 Interact seamlessly through a **[user-friendly web app](https://github.com/MycoAI/taxotagger-webapp)**
 
 ## Installation
 
@@ -23,7 +24,6 @@ conda activate venv-3.10
 # install the `taxotagger` package
 pip install --pre taxotagger
 ```
-
 
 ## Usage
 
