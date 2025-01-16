@@ -186,15 +186,15 @@ def parse_fasta(data: str | PathLike | TextIO) -> dict:
     Raises:
         ValueError: If there are duplicate FASTA headers.
     """
-    id_seq_dict = {}
+    header_seq_dict = {}
 
     fh = _fasta_to_handle(data)
     for record in SeqIO.parse(fh, "fasta"):
-        if record.id not in id_seq_dict:
-            id_seq_dict[record.id] = str(record.seq)
+        if record.description not in header_seq_dict:
+            header_seq_dict[record.description] = str(record.seq)
         else:
-            raise ValueError(f"Duplicate FASTA header found: `{record.id}`")
-    return id_seq_dict
+            raise ValueError(f"Duplicate FASTA header found: `{record.description}`")
+    return header_seq_dict
 
 
 def _fasta_to_handle(data: str | PathLike | TextIO) -> TextIO:
