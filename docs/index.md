@@ -28,7 +28,7 @@ Try the webapp demo at http://mycoai.org.
     license = {Apache-2.0},
     title = {{TaxoTagger}},
     url = {https://github.com/MycoAI/taxotagger},
-    version = {0.0.1-alpha.6}
+    version = {0.0.1-alpha.7}
     }
 
     ```
