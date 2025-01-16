@@ -34,7 +34,8 @@ class TaxoTagger:
         model.
 
         Args:
-            fasta_file: The path to the fasta file.
+            fasta_file: The path to the fasta file. Make sure the fasta file has no empty/duplicated
+                headers or sequences.
             model_id: The model ID to use for embedding the DNA sequences. Defaults to "MycoAI-CNN".
                 Available models see [`taxotagger.defaults.PRETRAINED_MODELS`][taxotagger.defaults.PRETRAINED_MODELS].
 
